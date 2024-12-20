@@ -1,0 +1,10 @@
+<!-- accounts/templates/accounts/protected.html -->
+{% extends "accounts/base.html" %}
+
+{% block title %}受保护页面{% endblock %}
+
+{% block content %}
+<h2>欢迎来到受保护页面！</h2>
+<p>这是只有登录用户才能看到的内容。</p>
+<a href="{% url 'logout' %}">登出</a>
+{% endblock %}

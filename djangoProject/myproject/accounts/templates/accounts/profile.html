@@ -1,0 +1,20 @@
+<!-- templates/accounts/profile.html -->
+{% extends "accounts/base.html" %}
+
+{% block title %}个人资料 - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card profile-card text-center">
+        <div class="card-body">
+            <h2>你好, {{ user.username }}</h2>
+            <p>这是你的个人资料页面。</p>
+            <!-- 登出表单 -->
+            <form action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">登出</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

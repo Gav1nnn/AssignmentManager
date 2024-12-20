@@ -1,0 +1,89 @@
+/* static/css/styles.css */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 视口高度 */
+}
+
+.card.signup-card {
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* 确保卡片宽度适应内容 */
+}
+
+h2 {
+    color: #333;
+}
+
+.form-signup {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* 确保表单宽度适应容器 */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left; /* 表单字段左对齐 */
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 22px); /* 减去边框和内边距 */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button.btn:hover {
+    background-color: #0056b3;
+}
+
+p a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+small.form-text {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+}
+
+.errorlist {
+    color: red;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
