@@ -1,0 +1,2 @@
+# AssignmentManager
+一个基于Django框架的作业管理系统
