@@ -87,3 +87,7 @@ small.form-text {
     padding: 0;
     margin: 0;
 }
+
+.form-group.row .user-type-container {
+    margin-left: auto; /* 让容器内的内容自动靠右 */
+}

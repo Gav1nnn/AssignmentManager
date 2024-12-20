@@ -1,0 +1,15 @@
+<!-- templates/assignments/assignment_list.html -->
+{% extends "base.html" %}
+
+{% block title %}作业列表{% endblock %}
+
+{% block content %}
+<h2>作业列表</h2>
+<ul>
+    {% for assignment in assignments %}
+        <li>{{ assignment.title }}</li>
+    {% empty %}
+        <li>没有作业。</li>
+    {% endfor %}
+</ul>
+{% endblock %}

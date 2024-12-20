@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',  # 确保此行存在，用于支持 sites 框架
     'captcha',
-    'accounts',  # 自定义应用
+    'accounts',
+    'courses',  # 新建的 courses 应用
+    'assignments',  # 新建的 assignments 应用
 ]
 
 if DEBUG:
@@ -123,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # 项目级别的静态文件目录
+    BASE_DIR / "static",
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # 收集静态文件的目标目录
 

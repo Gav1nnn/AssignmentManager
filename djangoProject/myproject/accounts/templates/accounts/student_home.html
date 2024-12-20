@@ -1,0 +1,44 @@
+<!-- templates/accounts/student_home.html -->
+{% extends "accounts/base.html" %}
+
+{% block title %}学生主页 - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card profile-card text-center">
+        <div class="card-body">
+            <h2>你好, {{ user.username }}</h2>
+            <p>欢迎来到你的学生主页。</p>
+
+            {% if user.is_student %}
+                <div class="student-section">
+                    <h3>学生信息</h3>
+                    <!-- 显示学生的特定信息 -->
+                    <p>这里是你的学生主页，可以查看课程、作业等。</p>
+
+                    <!-- 示例：显示学生的课程列表 -->
+                    <ul>
+                        {% for course in user.student_courses.all %}
+                            <li>{{ course.name }}</li>
+                        {% empty %}
+                            <li>你当前没有注册任何课程。</li>
+                        {% endfor %}
+                    </ul>
+
+                    <!-- 添加其他学生特有的功能链接或按钮 -->
+                    <a href="{% url 'courses:list' %}" class="btn btn-primary">查看课程列表</a>
+                    <a href="{% url 'assignments:list' %}" class="btn btn-secondary">查看作业</a>
+                </div>
+            {% else %}
+                <p>您不是学生用户，请联系管理员。</p>
+            {% endif %}
+
+            <!-- 登出表单 -->
+            <form action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mt-3">登出</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
