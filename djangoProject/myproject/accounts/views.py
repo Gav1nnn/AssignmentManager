@@ -19,18 +19,33 @@ class HomeView(TemplateView):
 
 
 class SignUpView(CreateView):
-    form_class = CustomUserCreationForm  # 使用你的自定义表单，或者 UserCreationForm
+    form_class = CustomUserCreationForm  # 使用你的自定义表单
     template_name = 'accounts/signup.html'
     success_url = reverse_lazy('accounts:home')  # 注册成功后重定向到主页或其他页面
 
+    def get_initial(self):
+        initial = super().get_initial()
+        if self.request.method == 'GET':
+            initial['user_type'] = self.request.GET.get('user_type', '')
+            initial['username'] = self.request.GET.get('username', '')
+            initial['email'] = self.request.GET.get('email', '')
+            initial['password1'] = self.request.GET.get('password1', '')
+            initial['password2'] = self.request.GET.get('password2', '')
+            initial['invite_code'] = self.request.GET.get('invite_code', '')
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Determine whether to show invite code and captcha based on initial_user_type or POST data
+        user_type = self.request.GET.get('user_type', '') or self.request.POST.get('user_type', '')
+        context['show_invite_code'] = (user_type == 'teacher')
+        return context
+
     def form_valid(self, form):
-        # Save the user first
         response = super().form_valid(form)
-
-        # Log the user in
-        login(self.request, self.object)  # 使用 login 函数自动登录新注册的用户
-
+        login(self.request, self.object)  # 自动登录新注册的用户
         return response
+
 
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
