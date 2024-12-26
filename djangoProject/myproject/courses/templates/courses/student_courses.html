@@ -1,0 +1,36 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<h1>课程列表</h1>
+
+<h2>已加入的课程</h2>
+<div id="user_courses">
+    {% for course in user_courses %}
+        <div>
+            <h3>{{ course.course_name }}</h3>
+            <p>课程代码: {{ course.course_code }}</p>
+            <button onclick="location.href='{% url 'courses:leave_course' course.id %}'">退出课程</button>
+        </div>
+    {% empty %}
+        <p>没有加入任何课程。</p>
+    {% endfor %}
+</div>
+
+<h2>未加入的课程</h2>
+<div id="all_courses">
+    {% for course in all_courses %}
+        {% if course not in user_courses %}
+            <div>
+                <h3>{{ course.course_name }}</h3>
+                <p>课程代码: {{ course.course_code }}</p>
+                <button onclick="location.href='{% url 'courses:join_course' course.id %}'">加入课程</button>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+
+
+

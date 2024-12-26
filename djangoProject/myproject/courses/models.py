@@ -1,14 +1,15 @@
 # courses/models.py
 
 from django.db import models
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
+from django.conf import settings  
 
 class Course(models.Model):
-    name = models.CharField(max_length=255)
-    teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='taught_courses', default=1)  # 设置默认值为1，假设这是管理员用户的ID
-    # 其他字段...
-
+    course_name = models.CharField(max_length=100, null=True)  # 允许为空
+    course_code = models.CharField(max_length=10, unique=True, null=True)  # 允许为空   确保课程序号唯一
+    teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='courses_created')  # 使用 settings.AUTH_USER_MODEL
+    students = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='courses_joined', blank=True)
+    
     def __str__(self):
-        return self.name
+        return f"{self.course_name} ({self.course_code})"
+
+

@@ -31,7 +31,7 @@
                     </ul>
 
                     <!-- 添加其他教师特有的功能链接或按钮 -->
-                    <a href="{% url 'courses:list' %}" class="btn btn-primary">查看课程列表</a>
+                    <a href="{% url 'courses:teacher_courses' %}" class="btn btn-primary">查看课程列表</a>
                     <a href="{% url 'assignments:list' %}" class="btn btn-secondary">查看作业</a>
                 </div>
             {% else %}

@@ -1,0 +1,37 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<h1>我的课程</h1>
+<button id="createCourseBtn">创建课程</button>
+
+<div id="courses">
+    {% for course in courses %}
+        <div>
+            <h2>{{ course.course_name }}</h2>
+            <p>课程代码: {{ course.course_code }}</p>
+            <p>授课老师: {{ course.teacher.username }}</p>
+        </div>
+    {% empty %}
+        <p>没有创建课程。</p>
+    {% endfor %}
+</div>
+
+<div id="createCourseModal" style="display:none;">
+    <form id="createCourseForm" method="post" action="{% url 'courses:create_course' %}">
+        {% csrf_token %}
+        <input type="text" name="course_name" placeholder="课程名称" required>
+        <input type="text" name="course_code" placeholder="课程代码" required>
+        <textarea name="description" placeholder="课程描述" required></textarea>
+        <button type="submit">创建课程</button>
+        <button type="button" onclick="document.getElementById('createCourseModal').style.display='none'">取消</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('createCourseBtn').onclick = function() {
+    document.getElementById('createCourseModal').style.display = 'block';
+}
+</script>
+{% endblock %}
+
+
